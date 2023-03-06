@@ -16,9 +16,9 @@ public class Practica1TAP {
      */
     public static void main(String[] args) {
         
-        SaludoV sv =new SaludoV();
-        sv.setVisible(true);
-         sv.setDefaultCloseOperation(sv.EXIT_ON_CLOSE);
+        SaludoV ss =new SaludoV();
+        ss.setVisible(true);
+         ss.setDefaultCloseOperation(ss.EXIT_ON_CLOSE);
         // TODO code application logic here
     }
     
