@@ -5,6 +5,10 @@
  */
 package miniencuesta;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import javax.swing.ButtonModel;
 import javax.swing.JOptionPane;
 
@@ -19,6 +23,7 @@ public class Ventana extends javax.swing.JFrame {
      */
     public Ventana() {
         initComponents();
+        
     }
 
     /**
@@ -44,7 +49,7 @@ public class Ventana extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         LBLslidder = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnGenerar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,10 +91,10 @@ public class Ventana extends javax.swing.JFrame {
         LBLslidder.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         LBLslidder.setText("0");
 
-        jButton1.setText("Generar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnGenerar.setText("Generar");
+        btnGenerar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnGenerarActionPerformed(evt);
             }
         });
 
@@ -97,36 +102,40 @@ public class Ventana extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1)
-            .addComponent(jSeparator2)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(LBLslidder, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JShoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JCBadmin)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(JRBwin)
-                                .addComponent(JRBlinux, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(JRBmac, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addComponent(JCBprogra)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(JCBdiseño, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLabel2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(13, 13, 13)
-                                .addComponent(jLabel3))))
+                        .addGap(6, 6, 6)
+                        .addComponent(LBLslidder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
-                        .addComponent(jButton1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(94, 94, 94)
+                                        .addComponent(btnGenerar))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(32, 32, 32)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(JShoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(JCBadmin)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(JRBwin)
+                                                    .addComponent(JRBlinux, javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(JRBmac, javax.swing.GroupLayout.Alignment.LEADING))
+                                                .addComponent(JCBprogra)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(JCBdiseño, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addComponent(jLabel2)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addGap(13, 13, 13)
+                                                    .addComponent(jLabel3))))))))
+                        .addGap(18, 18, 18)))
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,11 +163,11 @@ public class Ventana extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JShoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LBLslidder))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LBLslidder)
+                    .addComponent(JShoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btnGenerar)
                 .addContainerGap(40, Short.MAX_VALUE))
         );
 
@@ -173,16 +182,14 @@ public class Ventana extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_JCBprograActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
 
         String admin="";
         String diseno="";
         String progra="";
           String sisOP="";
           String esp1="",esp2="",esp3="";
-          
-          
-          
+     
           
         if (JRBlinux.isSelected()) {
             sisOP = JRBlinux.getText();
@@ -217,18 +224,117 @@ public class Ventana extends javax.swing.JFrame {
       JOptionPane.showMessageDialog(null,"Tu sistema operativo preferido es: "+ sisOP+" tus especialidad son: " +esp1+"  " +esp2+ "  "+ esp3 +" y el numero de horas dedicadas al ordenador son:" +horas);
 
       
+      
+      
+      
+      
+      
+       String SisOP = "";
+        String ESP1 = "";
+        String ESP2 = "";
+        String ESP3 = "";
+        int HORAS;
+        if (JRBwin.isSelected()) {
 
+            SisOP = JRBwin.getText();
 
+        } else if (JRBlinux.isSelected()) {
+            SisOP = JRBlinux.getText();
+
+        } else if (JRBmac.isSelected()) {
+
+            SisOP = JRBmac.getText();
+        }
+        
+        if(JCBprogra.isSelected()){
+            ESP1="P";
+        }else{
+            ESP1="N";
+        }
+        if(JCBdiseño.isSelected()){
+            ESP2="P";
+        }else{
+            ESP2="N";
+        }
+        if(JCBadmin.isSelected()){
+            ESP3="P";
+        }else{
+            ESP3="N";
+        }
+        
+       Connection conectar=null;
+Ventana cc = new Ventana();
+        
+ PreparedStatement ps = null;
+             conectar = cc.conectar();
+        
+        String sql = "INSERT INTO respuestas(sSisOper, cProgra,cDiseno,cAdmon,iHoras) VALUES (?,?,?,?,?)";
+
+        try {
+            ps = conectar.prepareStatement(sql);
+            ps.setString(1, SisOP);
+            ps.setString(2, ESP1);
+            ps.setString(3, ESP2);
+            ps.setString(4, ESP3);
+            ps.setInt(5, horas);
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.err.println(ex);
+            
+        } finally {
+            try {
+                conectar.close();
+            } catch (SQLException ex) {
+                System.err.println(ex);
+            }
+        }
 
 
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnGenerarActionPerformed
+  String database = "encuesta";
+    String url = "jdbc:mysql://localhost:3306/";
+    String user = "root";
+    String password = "KaneloRex";
+    String driver = "com.mysql.cj.jdbc.Driver";
+    Connection cx;
 
+    public final Connection conectar() {
+        try {
+            System.out.println("fase 1");
+            Class.forName(driver);
+            cx = DriverManager.getConnection(url + database, user, password);
+            System.out.println("CONECTADO A " + database);
+            
+            
+                System.out.println(database);
+                System.out.println(url);
+                System.out.println(user);
+                System.out.println(password);
+                
+                
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.err.println(ex);
+        }
+        return cx;
+    }
+
+    public void desconectar() {
+        try {
+            cx.close();
+        } catch (SQLException ex) {
+            System.err.println("ERROR 199923");
+        }
+    }
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+     Ventana vv = new Ventana();
+      vv.conectar();
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -258,6 +364,19 @@ public class Ventana extends javax.swing.JFrame {
                 new Ventana().setVisible(true);
             }
         });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -269,8 +388,8 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JRadioButton JRBwin;
     private javax.swing.JSlider JShoras;
     private javax.swing.JLabel LBLslidder;
+    private javax.swing.JButton btnGenerar;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

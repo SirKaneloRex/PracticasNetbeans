@@ -5,6 +5,10 @@
  */
 package miniencuesta;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 /**
  *
  * @author julia
@@ -19,6 +23,10 @@ public class MiniEncuesta {
         Ventana v1 =new Ventana();
         v1.setVisible(true);
         v1.setResizable(false);
+        
+        
+        
+        
     }
     
 }
